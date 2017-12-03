@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title> 첫번째 테스트</title>
+    </head>
+    <script>
+        /* // 1단계 : 구동 테스트 
+        var  tt = "1";
+        test();
+        function test(){
+            alert("test call");
+        }
+        
+        // 즉 아래 안됨
+        t1();
+        var t1 = function(){
+                // anonimus function은 주소할당 안됨 그러므로 function call을 먼저 하면 안됨 
+                alert("test call");
+        }
+        */
+        /*  2단ㅖ
+        var  testFunc = function(){  // private  내부 연산을 알려주고 싶지 않을 때 
+            this.a = 3; 
+            var b = 4; 
+            // 클로저 : function 내에 새로운 function을 선언하는 기능 
+            this.printSome = function(some){
+                console.log( some );
+                alert( some );
+                alert( b ); // 변수 b는 22라인의 선언에 의해 4 로 출력
+            }
+        }
+        var tf = new testFunc();
+
+        // alert( tf.a ); // 지역변수 a 가 tf 선언과 동시에 tf 가 살아 있는 동안 사용됨
+                    // 접근 제어자 
+        //alert( tf.b );
+        tf.printSome("아무거나");
+
+        function f1(){
+            var tf = new testFunc();
+            tf.printSome("아무거나");
+        }
+        */
+
+        /* 3단계  클로저를 이용한 계산기 */
+        var  testFunc = function(){  // private  내부 연산을 알려주고 싶지 않을 때 
+            this.a = 3; 
+            var b = 4; 
+            // 클로저 : function 내에 새로운 function을 선언하는 기능 
+            this.printSome = function(some){
+                alert( some );
+            }
+            this.add = function( num1, num2){
+                num1 = parseInt( num1 );  // 정수보정 
+                num2 = parseInt( num2 );
+                // this.printSome(num1 + num2);
+                return  num1+num2;
+            }
+        }
+       
+        function f1(){
+            var tf = new testFunc();
+            var numObj1 = document.getElementById("num1");
+            var numObj2 = document.getElementById("num2");
+            var  resultObj = document.getElementById("result"); // 결과에 출력하기 위한 것 
+
+            //tf.add( 2, 3 ) ;
+            // tf.add( numObj1.value, numObj2.value) ;
+            resultObj.value = tf.add( numObj1.value , numObj2.value );
+        }
+
+        var  a= 2; 
+        var  b="2";
+        alert( a + parseInt(b));
+      
+
+        </script>
+    <body>
+        <!-- <input type="button" value="테스트1" onclick="alert(1)"> -->
+        <!-- <input type="button" value="테스트1" onclick="f1()"> -->
+        <label for="num1">
+            숫자1 :
+        </label>
+        <input type="text" id="num1">
+        <label for="num2">
+                숫자2 :
+        </label>
+        <input type="text" id="num2">
+        <input type="button" id="btn" value="계산"  onclick="f1()">
+        <input type="text"  id="result">
+    </body>
+    
+</html>
